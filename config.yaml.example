@@ -1,0 +1,59 @@
+# LLM Configuration
+llm:
+  endpoint: http://localhost:8080/v1/chat/completions  # Your LLM endpoint (e.g., llama.cpp, OpenAI-compatible)
+  api_key: your-api-key-here  # API key (use "not-needed-for-local" for local servers)
+  model: qwen3-vl  # Vision model to use (e.g., qwen3-vl, llava, gpt-4-vision-preview)
+  timeout: 30  # Request timeout in seconds
+  max_retries: 3  # Maximum number of retry attempts
+
+# LLM Prompt Configuration for Intelligent Change Detection
+llm_prompt:
+  change_detection_enabled: true  # Enable intelligent filtering of trivial events
+  sensitivity: conservative  # conservative, balanced, permissive
+  # custom_prompt: null  # Uncomment and paste your custom prompt to override default
+  # Example custom prompt:
+  # custom_prompt: |
+  #   You are analyzing surveillance footage...
+  #   [your custom prompt here]
+
+# Motion Detection Configuration
+# These values can be calibrated using a calibration script
+motion:
+  sensitivity: medium  # high, medium, low
+  frame_check_interval_ms: 100
+  min_contour_area: 300  # Minimum pixel area to consider as motion
+  blur_kernel_size: 7  # Gaussian blur kernel (higher = more noise reduction)
+  threshold_delta: 25  # Minimum pixel difference to detect change
+  enable_morphology: false  # Use morphological operations (dilation/erosion)
+  morphology_kernel_size: 5  # Kernel size for morphological operations
+  min_motion_pixels: 300  # Minimum total pixels changed
+  mask_regions: []  # List of [x, y, w, h] regions to ignore
+
+# Storage Configuration
+storage:
+  storage_threshold_gb: 8.0  # Alert when storage drops below this threshold
+
+# Text-to-Speech Configuration
+tts:
+  enabled: true  # Enable/disable TTS announcements
+  voice_model: "en_GB-alba-medium.onnx"  # Path to Piper voice model
+  volume: 1.0  # Volume level (0.0 to 1.0)
+  rate: 1.0  # Speech rate multiplier
+
+# Server Configuration (for future web UI)
+server:
+  host: 0.0.0.0
+  port: 8000
+  debug: false  # Enable debug mode
+
+# Calibration Configuration
+calibration:
+  auto_calibrate_on_startup: false
+  frames_to_capture: 5
+  confidence_threshold: 0.7
+
+# Logging Configuration
+logging:
+  enabled: true
+  log_dir: logs
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
