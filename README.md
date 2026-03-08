@@ -18,6 +18,14 @@ The most intelligent home security camera you've ever seen. Roz monitors a webca
 - **Multi-Frame Context**: Analyzes multiple frames at once to only announce notable differences.
 - **Text-to-Speech**: Based on what it sees, it uses text-to-speech to read out what it sees.
 
+## Demo
+
+Here's Roz set up to monitor my front door. Unmute audio for full effect.
+
+https://github.com/user-attachments/assets/31f72b03-0e6d-4fda-944f-4d52ebe990bd
+
+
+
 ## Requirements
 
 - A Linux system to run the software (I used a Raspberry Pi 4)
