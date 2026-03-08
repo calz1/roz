@@ -41,6 +41,7 @@ recommended_thresholds.txt
 
 # IDE and editor files
 .vscode/
+.claude/
 .idea/
 *.swp
 *.swo
@@ -73,6 +74,7 @@ htmlcov/
 docs/_build/
 site/
 _build/
+
 
 # MyPy
 .mypy_cache/

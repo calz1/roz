@@ -68,6 +68,10 @@ This application is the equivalent of:
 
 On my local setup, the LLM response takes about one second and everything else (request, response, TTS synthesis) takes another second. If you used a GPU for TTS and ran it all on one PC, it would probably be faster.
 
+**Why does Roz occasionally repeat itself?**
+
+Because what constitutes a "meaningful change" in a scene is subjective. In `/src/llm/prompt_config.py`, the prompt is constructed with rules to control when Roz speaks. This is an attempt to balance two extremes: announcing the full contents of every image every second, or only announcing major changes and potentially missing something important. The current configuration worked reasonably well for my setup, but you might want to adjust it for other situations. This is also model-dependent; smaller 4B models respond quickly but aren't as good at following the prompt or discerning meaningful differences. Larger models generally work better, but the four-second response delay can be annoying. Feel free to tweak the prompt to better define what is and isn't important for your environment.  
+
 ## Installation
 
 1. **Clone the repository**:
@@ -107,7 +111,7 @@ On my local setup, the LLM response takes about one second and everything else (
 
 Run the main application:
 ```bash
-uv run python main.py
+uv run main.py
 ```
 
 The system will:
@@ -171,6 +175,24 @@ aplay -l
 ```
 
 Update the device in `src/speech/announcer.py` if needed (default: `plughw:3,0`).
+
+## Troubleshooting
+
+### Camera Focus & Positioning
+If you are running Roz headless (without a monitor) and need to focus or position the camera, use `stream_camera.py`. This script starts a lightweight web server that streams the camera feed to your browser.
+
+```bash
+uv run stream_camera.py
+```
+Then, open your browser and navigate to `http://<your-device-ip>:8080`.
+
+### Audio Issues
+If you aren't hearing anything or want to verify your TTS setup, use `test_audio.py`. This script will attempt to initialize the Piper TTS engine and play a test message ("Testing audio output. Hello world.").
+
+```bash
+uv run test_audio.py
+```
+If this fails, check your `config.yaml` to ensure the `tts.device` and `tts.voice_model` paths are correct.
 
 ## License
 
