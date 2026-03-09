@@ -40,15 +40,15 @@ https://github.com/user-attachments/assets/31f72b03-0e6d-4fda-944f-4d52ebe990bd
 
 **Why did you make this?**
 
-I heard an ad for Google's Home Premium Advanced service that claimed to analyze images from your Nest doorbell and describe what it sees. I thought, "That sounds cool, but I'm not paying $20/month for it. Can I make that?"
+I heard an ad for a service that claimed to analyze images from your video doorbell and describe what it sees. I thought, "That sounds cool, but I'm not paying $20/month for it. Can I make that?"
 
 **Why is it a golden head?**
 
-The first version was just a camera and a speaker in a cardboard box. I printed a 3D enclosure to hold them securely and thought gold paint might look fun. Also, if it was painted gold, maybe people would think of the gold statue from Indiana Jones and not steal it. 
+The first version was just a camera and a speaker in a cardboard box. I 3D printed a case to hold them securely and thought gold paint might look fun. Also, if it was painted gold, maybe people would think of the gold statue from Indiana Jones and not steal it. 
 
 **What LLMs work?**
 
-Any LLM with vision capabilities that provides an OpenAI-compatible API endpoint. I used Qwen3.5 35B-A3B hosted on another PC in my house with an Nvidia 3090 GPU. You could use [llama.cpp](https://github.com/ggml-org/llama.cpp), vLLM, LM Studio, or similar.
+Any LLM with vision capabilities that provides an OpenAI-compatible API endpoint. I used Qwen3.5 35B-A3B Q4 hosted on another PC in my house with an Nvidia 3090 GPU. You could use [llama.cpp](https://github.com/ggml-org/llama.cpp), vLLM, LM Studio, or similar.
 
 **Can I use a different camera?**
 
@@ -65,6 +65,7 @@ This application is the equivalent of:
 2. Take each image, combine it with a text prompt, and upload it to Claude or ChatGPT.
 3. Wait for the text, bring it back to your PC, and then run another program to convert the text response to audio.
 4. Start immediately playing the audio while capturing the next frame.
+5. Repeat as fast as possible.
 
 On my local setup, the LLM response takes about one second and everything else (request, response, TTS synthesis) takes another second. If you used a GPU for TTS and ran it all on one PC, it would probably be faster.
 
@@ -118,7 +119,7 @@ The system will:
 1. Initialize the camera and establish a baseline frame
 2. Continuously monitor for motion
 3. When motion is detected, send frames to the LLM for analysis
-4. If a meaningful change is detected (not just minor movement), announce it via TTS
+4. If a meaningful change is detected, announce it via TTS.
 
 Press `Ctrl+C` to stop.
 
